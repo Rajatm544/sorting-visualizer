@@ -1,5 +1,108 @@
+:root {
+  --mainText: navy;
+  --backgroundColor: white;
+  --arrayColor: orangered;
+  --arrayEleBorder: #1b1b1b;
+  --secondaryColor: pink;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  background: var(--backgroundColor);
+  color: var(--mainText);
+  font-family: sans-serif;
+}
+
+.main-container {
+  display: flex;
+  position: fixed;
+  bottom: 1%;
+  left: 5%;
+  width: 95%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 90%;
+  height: 90%;
+  border: 1px solid black;
+}
+
+.sort-options {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: auto;
+}
+
+button {
+  background-color: var(--secondaryColor);
+  color: var(--mainText);
+  border: 2px solid var(--arrayEleBorder);
+  padding: 5px;
+}
+
+.array-container {
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-flow: wrap-reverse;
+}
+
+.array-ele {
+  margin: 1px;
+  border: 1px solid var(--arrayEleBorder);
+  background: var(--arrayColor);
+}
+
+.slide-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 10px;
+  width: 30%;
+  color: var(--arrayEleBorder);
+  font-weight: bold;
+}
+
+/* The slider itself */
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50%;
+  background-color: var(--arrayEleBorder);
+  outline: none;
+  height: 5px;
+  opacity: 0.8;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1;
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--arrayColor);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: var(--arrayColor);
+  border-radius: 50%;
+  cursor: pointer;
 }
