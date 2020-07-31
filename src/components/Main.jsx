@@ -1,16 +1,17 @@
+/* eslint-disable no-loop-func */
 import React, { useState, useEffect } from "react";
 // import BubbleSort from "./BubbleSort";
 
 const Main = () => {
     const [arr, setArr] = useState([]);
-    const [arrLength, setArrLength] = useState(10);
+    const [arrLength, setArrLength] = useState(50);
     // const [sorted, setSorted] = useState(false);
 
     // All the colors
     let arrayColor = getComputedStyle(
         document.documentElement
     ).getPropertyValue("--arrayColor");
-    let endColor = "#66FF66";
+    let endColor = "#87FF2A";
     let compareEleColor = "#FFCFF1";
 
     // Fill the array with random numbers
@@ -29,7 +30,6 @@ const Main = () => {
             random = getRandomInt(10, 1000);
             randArr.push(random);
         }
-        // console.log(randArr);
         setArr(randArr);
     }
 
@@ -52,7 +52,7 @@ const Main = () => {
             let ar = arr;
             // if (!sorted) {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
-            setTimeout(end, (1000 / arrLength) * ar.length ** 2);
+            setTimeout(end, 1000 * ar.length);
             for (let i = 0; i < ar.length; i++) {
                 // The outer loop must run once time the entire array length has been traversed
                 setTimeout(() => {
@@ -127,6 +127,43 @@ const Main = () => {
                 }, 1000 * i);
                 // }
             }
+        } else if (e.target.value === "insertion") {
+            setTimeout(end, 200 * arrLength);
+            let ar = arr;
+            for (let i = 1; i < arrLength; i++) {
+                let current = document.getElementById(i);
+
+                let currentVal = ar[i];
+                setTimeout(() => {
+                    for (let j = i - 1; j >= 0; j--) {
+                        setTimeout(() => {
+                            current.style.background = compareEleColor;
+
+                            let first = document.getElementById(j);
+                            first.style.background = "#9C2542";
+                            first.style.border = `1px solid ${arrayColor}`;
+
+                            if (ar[j] > currentVal) {
+                                let firstHeight = first.clientHeight;
+                                let currentHeight = current.clientHeight;
+
+                                first.style.height = `${currentHeight}px`;
+                                current.style.height = `${firstHeight}px`;
+
+                                first.style.background = compareEleColor;
+                                current.style.background = "#9C2542";
+
+                                [ar[j + 1], ar[j]] = [ar[j], ar[j + 1]];
+                                // current.style.background = arrayColor;
+                                current = document.getElementById(j);
+                                currentVal = ar[j];
+                                first.style.background = arrayColor;
+                                first.style.border = `1px solid ${arrayColor}`;
+                            }
+                        }, (200 / arrLength) * (arrLength - j));
+                    }
+                }, 200 * (i - 1));
+            }
         }
     }
 
@@ -138,7 +175,7 @@ const Main = () => {
                     setTimeout(() => {
                         ele.style.background = endColor;
                         ele.style.borderRadius = "3em 3em 0 0";
-                        ele.style.border = "1px solid #44D7A8";
+                        ele.style.border = "1px solid #00CC99";
                     }, index * parseInt(arrLength / 3));
                 })();
             }
