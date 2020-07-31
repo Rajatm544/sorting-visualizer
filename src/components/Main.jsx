@@ -49,6 +49,12 @@ const Main = () => {
 
     function handleSortSelect(e) {
         e.preventDefault();
+
+        // Disable the buttons once a sorting technique is clicked
+        const buttons = Array.from(document.querySelectorAll("button"));
+        buttons.map((button) => (button.disabled = true));
+
+        // Perform the required visualization
         if (e.target.value === "bubble") {
             let ar = arr;
             // if (!sorted) {
@@ -190,6 +196,13 @@ const Main = () => {
                 })();
             }
         );
+
+        // Re-enable the buttons once a sorting technique is visualized
+        const buttons = Array.from(document.querySelectorAll("button"));
+        buttons.map((button) => {
+            button.disabled = false;
+            return true;
+        });
     }
 
     // To check if my algorithm does actually sort the array properly
