@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 const Main = () => {
     const [arr, setArr] = useState([]);
-    const [arrLength, setArrLength] = useState(50);
+    const [arrLength, setArrLength] = useState(5);
     // const [sorted, setSorted] = useState(false);
 
     // All the colors
@@ -25,13 +25,14 @@ const Main = () => {
         });
 
         const randArr = [];
-        let random;
+        let random = 100;
         const size = arrLength;
         for (let i = 0; i < size; i++) {
             random = getRandomInt(10, 1000);
             randArr.push(random);
         }
-        setArr(randArr);
+        // console.log(randArr);
+        setArr([...new Set(randArr)]);
     }
 
     useEffect(resetArray, [arrLength]);
@@ -129,16 +130,16 @@ const Main = () => {
                                     j
                                 ).style.background = arrayColor;
                             }
-                        }, (1000 / arrLength) * j);
+                        }, (1000 / ar.length) * j);
                     }
                 }, 1000 * i);
             }
         } else if (e.target.value === "insertion") {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
-            setTimeout(end, 1000 * arrLength);
             let ar = arr;
+            setTimeout(end, 1000 * ar.length);
             // Outer loop needs to run for the entire length of the array
-            for (let i = 1; i < arrLength; i++) {
+            for (let i = 1; i < ar.length; i++) {
                 // Keep track of the array element that needs to be inserted to correct position
                 let current = document.getElementById(i);
                 let currentVal = ar[i];
@@ -176,13 +177,12 @@ const Main = () => {
                                 current = document.getElementById(j);
                                 currentVal = ar[j];
                             }
-                        }, (1000 / arrLength) * (arrLength - j)); // multiplied by (arrLength - j) because j is decrementing in this case
+                        }, (1000 / ar.length) * (ar.length - j)); // multiplied by (arrLength - j) because j is decrementing in this case
                     }
                 }, 1000 * (i - 1)); // multiplied by (i - 1) because outer loop starts from 1, not 0
             }
         }
     }
-
     // Funtion to color the entire array once it has been sorted
     function end() {
         Array.from(document.querySelectorAll(".array-ele")).map(
