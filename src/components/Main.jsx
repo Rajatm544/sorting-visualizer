@@ -57,7 +57,7 @@ const Main = () => {
 
         // Perform the required visualization
         if (e.target.value === "bubble") {
-            let ar = [...arr];
+            let ar = arr;
             // if (!sorted) {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
             setTimeout(end, 1000 * ar.length);
@@ -136,7 +136,7 @@ const Main = () => {
             }
         } else if (e.target.value === "insertion") {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
-            let ar = [...arr];
+            let ar = arr;
             setTimeout(end, 1000 * ar.length);
             // Outer loop needs to run for the entire length of the array
             for (let i = 1; i < ar.length; i++) {
@@ -186,7 +186,7 @@ const Main = () => {
             // Then perform the merge sort as usual, all we need is the different stages of merging, which we get from dequeueing.
 
             // Make a copy of the state array
-            const ar = [...arr];
+            const ar = arr;
             // An array implemented as a queue
             const queue = [];
 
@@ -262,9 +262,7 @@ const Main = () => {
                         // Change height and background
                         currentEleDiv.style.background = setEleColor;
                         currentEleDiv.style.border = `1px solid ${arrayColor}`;
-                        let reqDivHeight = `${parseInt(
-                            currentSection[index] / 15
-                        )}vh`; // (we divide by 15 because we have the value in the array, but we need to display it as a bar)
+                        let reqDivHeight = `${currentSection[index] / 15}vh`; // (we divide by 15 because we have the value in the array, but we need to display it as a bar)
                         currentEleDiv.style.height = reqDivHeight;
                     });
                 }, (1000 / Math.log2(1000)) * i); // waiting time correponds to O(n logn). Note: for previous two sorting techniques, the outer loop's waiting time was just (1000 * i)
@@ -329,7 +327,7 @@ const Main = () => {
                             id={`${index}`}
                             className="array-ele"
                             style={{
-                                height: `${parseInt(ele / 15)}vh`,
+                                height: `${ele / 15}vh`,
                                 width: `${40 / arrLength}vw`,
                             }}
                         />
