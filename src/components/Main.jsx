@@ -280,7 +280,7 @@ const Main = () => {
                         ele.style.background = endColor;
                         ele.style.borderRadius = "3em 3em 0 0";
                         ele.style.border = "1px solid #00CC99";
-                    }, index * parseInt(arrLength / 5));
+                    }, index * parseInt(450 / arrLength));
                 })();
             }
         );
