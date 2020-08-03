@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 const Main = () => {
     const [arr, setArr] = useState([]);
-    const [arrLength, setArrLength] = useState(5);
+    const [arrLength, setArrLength] = useState(50);
     // const [sorted, setSorted] = useState(false);
 
     // All the colors
@@ -52,11 +52,11 @@ const Main = () => {
         e.preventDefault();
 
         // Disable the buttons once a sorting technique is clicked
-        const buttons = Array.from(document.querySelectorAll("button"));
-        buttons.map((button) => (button.disabled = true));
+        // const buttons = Array.from(document.querySelectorAll("button"));
+        // buttons.map((button) => (button.disabled = true));
 
-        // Disable the slider as well
-        document.querySelector("#my-range").disabled = true;
+        // // Disable the slider as well
+        // document.querySelector("#my-range").disabled = true;
 
         // Perform the required visualization
         if (e.target.value === "bubble") {
@@ -270,6 +270,97 @@ const Main = () => {
                     });
                 }, (1000 / Math.log2(1000)) * i); // waiting time correponds to O(n logn). Note: for previous two sorting techniques, the outer loop's waiting time was just (1000 * i)
             }
+        } else if (e.target.value === "quick") {
+            let ar = arr;
+
+            // invoke the end() after a time corresponding to O(n logn)
+            setTimeout(end, (1000 / Math.log2(1000)) * ar.length);
+
+            // An async sleep function to delay the swapping action in the quick sort
+            function sleep(ms) {
+                return new Promise((resolve) => setTimeout(resolve, ms));
+            }
+
+            // The helper function to place the pivot in its correct index, and return the index
+            async function pivot(a, start = 0, end = a.length - 1) {
+                let pivotIdx = start;
+                let pivot = a[pivotIdx];
+
+                for (let i = start + 1; i <= end; i++) {
+                    // Visualize the current div being compared with the pivot element
+                    let currentDiv = document.getElementById(i);
+                    let currentHeight = currentDiv.clientHeight;
+                    currentDiv.style.background = compareEleColor;
+                    currentDiv.style.border = `1px solid ${arrayColor}`;
+
+                    // At the beginning, seperately color the zero index array element, becuase the loop starts from the 1st index
+                    if (start === 0) {
+                        let firstDiv = document.getElementById(0);
+                        firstDiv.style.background = compareEleColor;
+                        firstDiv.style.border = arrayColor;
+                    }
+
+                    let pivotDiv;
+                    if (a[i] < pivot) {
+                        pivotIdx++;
+
+                        // In case a swap needs to be made, color the pivot element
+                        pivotDiv = document.getElementById(pivotIdx);
+                        pivotDiv.style.background = setEleColor;
+                        pivotDiv.style.border = `1px solid ${arrayColor}`;
+                        let pivotHeight = pivotDiv.clientHeight;
+
+                        // visualize the swapping
+                        currentDiv.style.height = `${pivotHeight}px`;
+                        pivotDiv.style.height = `${currentHeight}px`;
+
+                        // Delay the actual swapping to help visualize it
+                        await sleep(2.5 * Math.log2(i * 1000)); // the value has been chosen arbitrarily to best match the O(n logn) time complexity
+
+                        // Swap current element with the pivot
+                        [a[i], a[pivotIdx]] = [a[pivotIdx], a[i]];
+                    }
+                }
+
+                // After the loop, visualize the final swap to indicate the correct pivot position
+                let startDiv = document.getElementById(start);
+                let startHeight = startDiv.clientHeight;
+
+                let pivotDiv = document.getElementById(pivotIdx);
+                pivotDiv.style.background = setEleColor;
+                pivotDiv.style.border = `1px solid ${arrayColor}`;
+                let pivotHeight = pivotDiv.clientHeight;
+
+                // Visualize the swap
+                startDiv.style.height = `${pivotHeight}px`;
+                pivotDiv.style.height = `${startHeight}px`;
+
+                // Actual swap
+                [a[start], a[pivotIdx]] = [a[pivotIdx], a[start]];
+
+                return pivotIdx;
+            }
+
+            // function to perform the sort
+            async function quicksort(
+                array,
+                left = 0,
+                right = array.length - 1
+            ) {
+                // base case
+                if (left < right) {
+                    let pivotIndex = await pivot(array, left, right);
+                    // Wait for both recursive calls to end
+                    await Promise.all([
+                        quicksort(array, left, pivotIndex - 1),
+                        quicksort(array, pivotIndex + 1, right),
+                    ]);
+                }
+                return array;
+            }
+
+            // Invoke the function to begin the entire visualization procedure
+            quicksort(ar);
         }
     }
     // Funtion to color the entire array once it has been sorted
@@ -287,14 +378,14 @@ const Main = () => {
         );
 
         // Re-enable the buttons once a sorting technique is visualized
-        const buttons = Array.from(document.querySelectorAll("button"));
-        buttons.map((button) => {
-            button.disabled = false;
-            return true;
-        });
+        // const buttons = Array.from(document.querySelectorAll("button"));
+        // buttons.map((button) => {
+        //     button.disabled = false;
+        //     return true;
+        // });
 
-        // Re-enable the slider once the array is sorted
-        document.querySelector("#my-range").disabled = false;
+        // // Re-enable the slider once the array is sorted
+        // document.querySelector("#my-range").disabled = false;
     }
 
     // To check if my algorithm does actually sort the array properly
