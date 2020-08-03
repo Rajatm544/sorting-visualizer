@@ -55,6 +55,9 @@ const Main = () => {
         const buttons = Array.from(document.querySelectorAll("button"));
         buttons.map((button) => (button.disabled = true));
 
+        // Disable the slider as well
+        document.querySelector("#my-range").disabled = true;
+
         // Perform the required visualization
         if (e.target.value === "bubble") {
             let ar = arr;
@@ -289,6 +292,9 @@ const Main = () => {
             button.disabled = false;
             return true;
         });
+
+        // Re-enable the slider once the array is sorted
+        document.querySelector("#my-range").disabled = false;
     }
 
     // To check if my algorithm does actually sort the array properly
@@ -344,6 +350,7 @@ const Main = () => {
                     max="150"
                     value={arrLength}
                     className="slider"
+                    id="my-range"
                 />
             </section>
         </div>
