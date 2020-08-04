@@ -3,8 +3,12 @@ function mergeSort(ar) {
     let arrayColor = getComputedStyle(
         document.documentElement
     ).getPropertyValue("--arrayColor");
-    let compareEleColor = "#FFCFF1";
-    let setEleColor = "#9C2542";
+    let compareEleColor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--compareEleColor");
+    let setEleColor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--setEleColor");
 
     // First enqueue all the arrays that are returned after getting merged.
     // Then perform the merge sort as usual, all we need is the different stages of merging, which we get from dequeueing.

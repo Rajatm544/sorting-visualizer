@@ -3,8 +3,12 @@ function quickSort(ar) {
     let arrayColor = getComputedStyle(
         document.documentElement
     ).getPropertyValue("--arrayColor");
-    let compareEleColor = "#FFCFF1";
-    let setEleColor = "#9C2542";
+    let compareEleColor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--compareEleColor");
+    let setEleColor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--setEleColor");
 
     // An async sleep function to delay the swapping action in the quick sort
     function sleep(ms) {
@@ -84,6 +88,8 @@ function quickSort(ar) {
         }
         return array;
     })(ar);
+
+    return;
 }
 
 export default quickSort;

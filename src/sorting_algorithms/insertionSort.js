@@ -4,8 +4,13 @@ function insertionSort(ar) {
     let arrayColor = getComputedStyle(
         document.documentElement
     ).getPropertyValue("--arrayColor");
-    let compareEleColor = "#FFCFF1";
-    let setEleColor = "#9C2542";
+    let compareEleColor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--compareEleColor");
+    let setEleColor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--setEleColor");
+
     // Outer loop needs to run for the entire length of the array
     for (let i = 1; i < ar.length; i++) {
         // Keep track of the array element that needs to be inserted to correct position

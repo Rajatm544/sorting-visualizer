@@ -3,8 +3,12 @@ function bubbleSort(ar) {
     let arrayColor = getComputedStyle(
         document.documentElement
     ).getPropertyValue("--arrayColor");
-    let compareEleColor = "#FFCFF1";
-    let setEleColor = "#9C2542";
+    let compareEleColor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--compareEleColor");
+    let setEleColor = getComputedStyle(
+        document.documentElement
+    ).getPropertyValue("--setEleColor");
 
     for (let i = 0; i < ar.length; i++) {
         // The outer loop must run once time the entire array length has been traversed
