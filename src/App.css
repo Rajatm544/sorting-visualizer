@@ -1,9 +1,12 @@
 :root {
-  --mainText: #26dacb;
+  --mainText: #66fcf1;
   --backgroundColor: #2d283e;
   --arrayColor: #E30B5C;
   --arrayEleBorder: white;
-  --secondaryColor: #00468C;
+  --secondaryColor: #0b2d53;
+  --compareEleColor: #FFCFF1;
+  --setEleColor: #9C2542;
+  --endColor: #B2F302;
 }
 
 html,
@@ -13,7 +16,36 @@ body {
   height: 100%;
   background: var(--backgroundColor);
   color: var(--mainText);
-  font-family: sans-serif;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.outer-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  /* border: 1px solid white; */
+  color: var(--mainText);
+  background: var(--secondaryColor);
+  height: 3em;
+
+  -webkit-box-shadow: 3px 10px 12px -8px var(--mainText);
+  -moz-box-shadow: 3px 10px 12px -8px var(--mainText);
+  box-shadow: 3px 10px 12px -8px var(--mainText);
+}
+
+.nav-heading {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .main-container {
@@ -27,7 +59,6 @@ body {
   justify-content: flex-end;
   width: 90%;
   height: 90%;
-  /* border: 1px solid white; */
 }
 
 .sort-options {
@@ -35,15 +66,32 @@ body {
   flex-flow: row nowrap;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: auto;
+  margin: auto 0;
 }
 
 button {
-  background-color: var(--secondaryColor);
+  background-color: var(--backgroundColor);
+  border-color: var(--mainText);
+  border-width: 3px;
+  border-radius: 1em;
   color: var(--mainText);
-  border: 2px solid var(--arrayEleBorder);
   padding: 5px;
-  border: 2px solid var(--arrayEleBorder);
+  outline: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 5px;
+}
+
+button:hover {
+  color: var(--mainText);
+  /* background: var(--arrayColor); */
+  border-color: var(--arrayColor);
+  text-shadow: -1px 0 var(--arrayColor),
+    0 1px var(--arrayColor),
+    1px 0 var(--arrayColor),
+    0 -1px var(--arrayColor);
+  /* Firefox 3.5+, Opera 9+, Safari 1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Glow(Color=var(--arrayColor), Strength=1);
 }
 
 .array-container {
@@ -53,13 +101,16 @@ button {
   height: 85%;
   display: flex;
   flex-flow: wrap-reverse;
-  border: 1px solid white;
+  -webkit-box-shadow: inset 0px -10px 8px -8px var(--mainText);
+  -moz-box-shadow: inset 0px -10px 8px -8px var(--mainText);
+  box-shadow: inset 0px -10px 8px -8px var(--mainText);
 }
 
 .array-ele {
   margin: 1px;
   border: 1px solid var(--arrayEleBorder);
   background: var(--arrayColor);
+  z-index: 2;
 }
 
 .slide-container {
@@ -83,7 +134,7 @@ button {
   -webkit-appearance: none;
   appearance: none;
   width: 50%;
-  background-color: var(--arrayEleBorder);
+  background-color: var(--mainText);
   outline: none;
   border-radius: 5em;
   height: 5px;
@@ -103,7 +154,7 @@ button {
   appearance: none;
   width: 15px;
   height: 15px;
-  border: 2px solid var(--arrayEleBorder);
+  border: 2px solid white;
   border-radius: 50%;
   background: var(--arrayColor);
   cursor: pointer;
@@ -115,4 +166,70 @@ button {
   background: var(--arrayColor);
   border-radius: 50%;
   cursor: pointer;
+}
+
+/* Styling the toggle button */
+.theme-switch {
+  display: inline-flex;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+
+.switch {
+  /* display: inline-flex; */
+  margin: 0 10px;
+  position: relative;
+}
+
+.switch-input {
+  display: none;
+}
+
+.switch-label {
+  display: block;
+  width: 48px;
+  height: 24px;
+  text-indent: -150%;
+  clip: rect(0 0 0 0);
+  color: transparent;
+  user-select: none;
+}
+
+.switch-label::before,
+.switch-label::after {
+  content: "";
+  display: block;
+  position: absolute;
+  cursor: pointer;
+}
+
+.switch-label::before {
+  width: 100%;
+  height: 100%;
+  background-color: var(--mainText);
+  border-radius: 9999em;
+  -webkit-transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease;
+}
+
+.switch-label::after {
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--arrayColor);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
+  -webkit-transition: left 0.25s ease;
+  transition: left 0.25s ease;
+}
+
+.switch-input:checked+.switch-label::before {
+  background-color: var(--mainText);
+}
+
+.switch-input:checked+.switch-label::after {
+  left: 24px;
 }
