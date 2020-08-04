@@ -62,6 +62,9 @@ const Main = () => {
         setArrLength(e.target.value);
     }
 
+    // make a copy of the state array
+    let ar = [...arr];
+
     function handleSortSelect(e) {
         e.preventDefault();
 
@@ -78,8 +81,6 @@ const Main = () => {
         slider.disabled = true;
         slider.style.background = "#DA2C43";
 
-        // make a copy of the state array
-        let ar = [...arr];
         // Perform the required visualization
         if (e.target.value === "bubble") {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
@@ -132,7 +133,8 @@ const Main = () => {
         slider.disabled = false;
         slider.style.background = mainText;
 
-        // setTimeout(resetArray, 50 * (arr.length % 100));
+        // Sort the ar array to ensure that if another sorting technique is used immediately after another, it doesnt bug out
+        ar = ar.sort((a, b) => a - b);
     }
 
     // To check if my algorithm does actually sort the array properly
