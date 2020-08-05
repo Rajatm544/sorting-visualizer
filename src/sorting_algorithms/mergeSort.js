@@ -85,7 +85,7 @@ function mergeSort(ar) {
                 // Change height and background
                 currentEleDiv.style.background = setEleColor;
                 currentEleDiv.style.border = `1px solid ${arrayColor}`;
-                let reqDivHeight = `${currentSection[index] / 15}vh`; // (we divide by 15 because we have the value in the array, but we need to display it as a bar)
+                let reqDivHeight = `${Math.ceil(currentSection[index] / 15)}vh`; // (we divide by 15 because we have the value in the array, but we need to display it as a bar)
                 currentEleDiv.style.height = reqDivHeight;
 
                 if (document.getElementById(ele + 1)) {

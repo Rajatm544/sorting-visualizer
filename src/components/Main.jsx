@@ -62,6 +62,41 @@ const Main = () => {
         setArrLength(e.target.value);
     }
 
+    function setTheme() {
+        let root = document.documentElement;
+        // check if dark theme background already exists
+        if (
+            getComputedStyle(root).getPropertyValue("--backgroundColor") ===
+            " #2d283e"
+        ) {
+            // Set the display of the correct theme prompt
+            document.getElementById("dark-theme-prompt").style.display =
+                "block";
+            document.getElementById("light-theme-prompt").style.display =
+                "none";
+
+            root.style.setProperty("--backgroundColor", " #C3CDE6");
+            root.style.setProperty("--mainText", " #0b2d53");
+            root.style.setProperty("--secondaryColor", " #009DC4");
+            root.style.setProperty("--arrayColor", " #5946B2");
+            root.style.setProperty("--arrayEleBorder", " #391285");
+            root.style.setProperty("--endColor", " #3AA655");
+        } else {
+            // Set the display of the correct theme prompt
+            document.getElementById("dark-theme-prompt").style.display = "none";
+            document.getElementById("light-theme-prompt").style.display =
+                "block";
+
+            root.style.setProperty("--backgroundColor", " #2d283e");
+            root.style.setProperty("--mainText", " #26dacb");
+            root.style.setProperty("--secondaryColor", " #2d283e");
+            root.style.setProperty("--arrayColor", " #E30B5C");
+            root.style.setProperty("--arrayEleBorder", " #fff");
+            root.style.setProperty("--setEleColor", " #9C2542");
+            root.style.setProperty("--compareEleColor", " #FFCFF1");
+        }
+    }
+
     // make a copy of the state array
     let ar = [...arr];
 
@@ -146,45 +181,11 @@ const Main = () => {
     //     }
     //     return true;
     // }
-    function setTheme() {
-        let root = document.documentElement;
-        // check if dark theme background already exists
-        if (
-            getComputedStyle(root).getPropertyValue("--backgroundColor") ===
-            " #2d283e"
-        ) {
-            // Set the display of the correct theme prompt
-            document.getElementById("dark-theme-prompt").style.display =
-                "block";
-            document.getElementById("light-theme-prompt").style.display =
-                "none";
-
-            root.style.setProperty("--backgroundColor", " #C3CDE6");
-            root.style.setProperty("--mainText", " #0b2d53");
-            root.style.setProperty("--secondaryColor", " #009DC4");
-            root.style.setProperty("--arrayColor", " #5946B2");
-            root.style.setProperty("--arrayEleBorder", " #391285");
-            root.style.setProperty("--endColor", " #3AA655");
-        } else {
-            // Set the display of the correct theme prompt
-            document.getElementById("dark-theme-prompt").style.display = "none";
-            document.getElementById("light-theme-prompt").style.display =
-                "block";
-
-            root.style.setProperty("--backgroundColor", " #2d283e");
-            root.style.setProperty("--mainText", " #26dacb");
-            root.style.setProperty("--secondaryColor", " #2d283e");
-            root.style.setProperty("--arrayColor", " #E30B5C");
-            root.style.setProperty("--arrayEleBorder", " white");
-            root.style.setProperty("--setEleColor", " #9C2542");
-            root.style.setProperty("--compareEleColor", " #FFCFF1");
-        }
-    }
 
     return (
         <div className="outer-container">
             <div className="navbar">
-                <p className="nav-heading">SORTING VISUALIZER</p>
+                <p className="nav-heading">VISUAL SORT</p>
 
                 <div></div>
 
@@ -232,7 +233,7 @@ const Main = () => {
                                 id={`${index}`}
                                 className="array-ele"
                                 style={{
-                                    height: `${ele / 15}vh`,
+                                    height: `${Math.ceil(ele / 15)}vh`,
                                     width: `${40 / arrLength}vw`,
                                 }}
                             />
