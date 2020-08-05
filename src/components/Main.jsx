@@ -4,6 +4,7 @@ import bubbleSort from "../sorting_algorithms/bubbleSort";
 import insertionSort from "../sorting_algorithms/insertionSort";
 import mergeSort from "../sorting_algorithms/mergeSort";
 import quickSort from "../sorting_algorithms/quickSort";
+import Logo from "../icon.svg";
 
 const Main = () => {
     const [arr, setArr] = useState([]);
@@ -91,9 +92,9 @@ const Main = () => {
 
             root.style.setProperty("--backgroundColor", " #2d283e");
             root.style.setProperty("--mainText", " #26dacb");
-            root.style.setProperty("--secondaryColor", " #2d283e");
+            root.style.setProperty("--secondaryColor", " #0b2d53");
             root.style.setProperty("--arrayColor", " #E30B5C");
-            root.style.setProperty("--arrayEleBorder", " #fff");
+            root.style.setProperty("--arrayEleBorder", " #79002c");
             root.style.setProperty("--setEleColor", " #9C2542");
             root.style.setProperty("--compareEleColor", " #FFCFF1");
         }
@@ -180,38 +181,24 @@ const Main = () => {
 
         // Sort the ar array to ensure that if another sorting technique is used immediately after another, it doesnt bug out
         ar = ar.sort((a, b) => a - b);
-
-        // (function () {
-        //     let link = document.querySelector("link");
-
-        //     if (link.getAttribute("rel") === "stylesheet") {
-        //         let href = link.getAttribute("href").split("?")[0];
-        //         let newHref = href + "?version=" + new Date().getMilliseconds();
-        //         console.log(newHref);
-        //         link.setAttribute("href", newHref);
-        //     }
-        // })();
     }
-
-    // To check if my algorithm does actually sort the array properly
-    // function checkSort(array) {
-    //     const jsSort = arr.sort((a, b) => a - b);
-    //     if (jsSort.length !== array.length) return false;
-    //     for (let i = 0; i < arr.length; i++) {
-    //         if (jsSort[i] !== array[i]) return false;
-    //     }
-    //     return true;
-    // }
 
     return (
         <div className="outer-container">
             <div className="navbar">
-                <p className="nav-heading">VISUAL SORT</p>
+                <span className="nav-brand">
+                    <img src={Logo} alt="logo" id="nav-logo" />
+                    <p className="nav-heading">Visual Sort</p>
+                </span>
 
                 <div></div>
 
                 <div className="theme-switch">
-                    <span id="dark-theme-prompt" style={{ display: "none" }}>
+                    <span
+                        className="theme-prompt"
+                        id="dark-theme-prompt"
+                        style={{ display: "none" }}
+                    >
                         DARK THEME
                     </span>
                     <div className="switch">
@@ -226,7 +213,9 @@ const Main = () => {
                             className="switch-label"
                         ></label>
                     </div>
-                    <span id="light-theme-prompt">LIGHT THEME</span>
+                    <span className="theme-prompt" id="light-theme-prompt">
+                        LIGHT THEME
+                    </span>
                 </div>
             </div>
             <div className="main-container">
@@ -262,19 +251,25 @@ const Main = () => {
                     })}
                 </section>
 
-                <section className="slide-container">
+                <section className="slider-container">
+                    <section></section>
                     <label>Set Array Size</label>
-                    <input
-                        onChange={handleSlider}
-                        type="range"
-                        min="5"
-                        max="150"
-                        value={arrLength}
-                        className="slider"
-                        id="my-range"
-                    />
+                    <div className="slider-content">
+                        <span>5</span>
+                        <input
+                            onChange={handleSlider}
+                            type="range"
+                            min="5"
+                            max="150"
+                            value={arrLength}
+                            className="slider"
+                            id="my-range"
+                        />
+                        <span>150</span>
+                    </div>
                 </section>
             </div>
+            {/* <div className="footer">FOOTER</div> */}
         </div>
     );
 };
