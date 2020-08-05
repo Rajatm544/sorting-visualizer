@@ -2,7 +2,7 @@
   --mainText: #66fcf1;
   --backgroundColor: #2d283e;
   --arrayColor: #E30B5C;
-  --arrayEleBorder: white;
+  --arrayEleBorder: #79002c;
   --secondaryColor: #0b2d53;
   --compareEleColor: #FFCFF1;
   --setEleColor: #9C2542;
@@ -16,7 +16,7 @@ body {
   height: 100%;
   background: var(--backgroundColor);
   color: var(--mainText);
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 .outer-container {
@@ -36,15 +36,30 @@ body {
   color: var(--mainText);
   background: var(--secondaryColor);
   height: 3em;
-
+  z-index: 2;
   -webkit-box-shadow: 3px 10px 12px -8px var(--mainText);
   -moz-box-shadow: 3px 10px 12px -8px var(--mainText);
   box-shadow: 3px 10px 12px -8px var(--mainText);
 }
 
+.nav-brand {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#nav-logo {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--mainText);
+  border-radius: 5px;
+  margin: 0 10px;
+  padding: 0;
+}
+
 .nav-heading {
   margin: 0;
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
 }
 
@@ -109,31 +124,41 @@ button:hover {
 .array-ele {
   margin: 1px;
   border: 1px solid var(--arrayEleBorder);
-  background: var(--arrayColor);
+  background-color: var(--arrayColor);
   z-index: 2;
 }
 
-.slide-container {
+.slider-container {
   display: inline-flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   margin: 10px auto;
-  width: 30%;
+  width: 50%;
   color: var(--mainText);
-  font-weight: bold;
 }
 
-.slider-container div {
-  display: flex;
-  width: 100%;
+.slider-container .slider-content {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 }
 
+.slider-content span {
+  margin: 5px;
+}
+
+
+.slider-container label {
+  font-weight: 700;
+  font-size: 18px;
+}
 
 /* The slider itself */
 .slider {
   -webkit-appearance: none;
   appearance: none;
-  width: 50%;
+  width: 70%;
   background-color: var(--mainText);
   outline: none;
   border-radius: 5em;
@@ -171,8 +196,11 @@ button:hover {
 /* Styling the toggle button */
 .theme-switch {
   display: inline-flex;
+}
+
+.theme-prompt {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
   text-transform: uppercase;
 }
 
