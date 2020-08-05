@@ -62,12 +62,14 @@ const Main = () => {
         setArrLength(e.target.value);
     }
 
+    let root = document.documentElement;
+
     function setTheme() {
-        let root = document.documentElement;
         // check if dark theme background already exists
         if (
-            getComputedStyle(root).getPropertyValue("--backgroundColor") ===
-            " #2d283e"
+            getComputedStyle(document.documentElement).getPropertyValue(
+                "--backgroundColor"
+            ) === " #2d283e"
         ) {
             // Set the display of the correct theme prompt
             document.getElementById("dark-theme-prompt").style.display =
@@ -157,19 +159,38 @@ const Main = () => {
         // Re-enable the buttons once a sorting technique is visualized
         const buttons = Array.from(document.querySelectorAll("button"));
         buttons.map((button) => {
+            let currentStyle = button.style;
+            // Use ... operator to retain the other style properties
+            button.style = {
+                ...currentStyle,
+                borderColor: mainText,
+                color: mainText,
+            };
             button.disabled = false;
-            button.style.borderColor = mainText;
-            button.style.color = mainText;
-            return true;
         });
 
-        // // Re-enable the slider once the array is sorted
+        // Re-enable the slider once the array is sorted
         const slider = document.querySelector("#my-range");
+        let currentStyle = slider.style;
+        slider.style = {
+            ...currentStyle,
+            background: mainText,
+        };
         slider.disabled = false;
-        slider.style.background = mainText;
 
         // Sort the ar array to ensure that if another sorting technique is used immediately after another, it doesnt bug out
         ar = ar.sort((a, b) => a - b);
+
+        // (function () {
+        //     let link = document.querySelector("link");
+
+        //     if (link.getAttribute("rel") === "stylesheet") {
+        //         let href = link.getAttribute("href").split("?")[0];
+        //         let newHref = href + "?version=" + new Date().getMilliseconds();
+        //         console.log(newHref);
+        //         link.setAttribute("href", newHref);
+        //     }
+        // })();
     }
 
     // To check if my algorithm does actually sort the array properly
@@ -242,7 +263,7 @@ const Main = () => {
                 </section>
 
                 <section className="slide-container">
-                    <label>Set Array size</label>
+                    <label>Set Array Size</label>
                     <input
                         onChange={handleSlider}
                         type="range"
