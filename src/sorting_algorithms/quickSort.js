@@ -54,6 +54,7 @@ function quickSort(ar) {
                 [a[i], a[pivotIdx]] = [a[pivotIdx], a[i]];
             }
         }
+        await sleep(Math.log2(a.length));
 
         // After the loop, visualize the final swap to indicate the correct pivot position
         let startDiv = document.getElementById(start);

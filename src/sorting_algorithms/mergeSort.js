@@ -66,6 +66,7 @@ function mergeSort(ar) {
         currentSection.map((ele) => {
             let reqIndex = ar.indexOf(ele);
             tempIndices.push(reqIndex);
+            return true;
         });
         // Sort the indices required to animate every state, because we need to change height of the bars in the same order
         indices.push(tempIndices.sort((a, b) => a - b));
