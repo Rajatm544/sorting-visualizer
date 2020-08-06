@@ -9,7 +9,7 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
+	<link rel="manifest" href="mainfest.json">
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 	<title>Sorting Visualizer</title>
 </head>
@@ -18,5 +18,21 @@
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 	<div id="root"></div>
 </body>
+
+<script>
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', function () {
+			navigator.serviceWorker.register('worker.js').then((registration) => {
+				console.log('Worker registration successful', registration.scope);
+			}, (err) => {
+				console.log('Worker registration failed', err);
+			}).catch((err) => {
+				console.log(err);
+			});
+		});
+	} else {
+		console.log('Service Worker is not supported by browser.');
+	}
+</script>
 
 </html>
