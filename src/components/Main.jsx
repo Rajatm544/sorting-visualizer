@@ -21,6 +21,8 @@ const Main = () => {
             // Otherwise, let the maximum array element be 1000
             setMaxSize(1000);
         }
+
+        this.document.getElementById("switch-1").click();
     }, []);
 
     // All the colors
