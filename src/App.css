@@ -9,6 +9,11 @@
     --endColor: #b2f302;
 }
 
+::selection {
+    background: var(--arrayColor);
+    color: var(--compareEleColor);
+}
+
 html,
 body {
     margin: 0;
@@ -250,11 +255,11 @@ button:hover {
     transition: left 0.25s ease;
 }
 
-.switch-input:checked+.switch-label::before {
+.switch-input:checked + .switch-label::before {
     background-color: var(--mainText);
 }
 
-.switch-input:checked+.switch-label::after {
+.switch-input:checked + .switch-label::after {
     left: 24px;
 }
 
@@ -269,19 +274,6 @@ button:hover {
         height: 10%;
     }
 
-    .theme-switch {
-        width: 30%;
-    }
-
-    .switch {
-        margin: 0 5% 0 auto;
-    }
-
-    .navbar {
-        justify-content: space-between;
-        height: 10%;
-    }
-
     .nav-heading {
         font-size: 26px;
     }
@@ -289,6 +281,14 @@ button:hover {
     #nav-logo {
         width: 22px;
         height: 22px;
+    }
+
+    .theme-switch {
+        width: 30%;
+    }
+
+    .switch {
+        margin: 0 5% 0 auto;
     }
 
     .sort-options {
@@ -312,6 +312,5 @@ button:hover {
 
     .slider-container {
         width: 100%;
-        /* justify-content: space-around; */
     }
 }
