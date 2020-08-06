@@ -32,7 +32,6 @@ body {
     width: 100%;
     justify-content: space-around;
     align-items: center;
-    /* border: 1px solid white; */
     color: var(--mainText);
     background: var(--secondaryColor);
     height: 3em;
@@ -251,11 +250,11 @@ button:hover {
     transition: left 0.25s ease;
 }
 
-.switch-input:checked + .switch-label::before {
+.switch-input:checked+.switch-label::before {
     background-color: var(--mainText);
 }
 
-.switch-input:checked + .switch-label::after {
+.switch-input:checked+.switch-label::after {
     left: 24px;
 }
 
@@ -284,7 +283,7 @@ button:hover {
     }
 
     .nav-heading {
-        font-size: 24px;
+        font-size: 26px;
     }
 
     #nav-logo {
@@ -295,7 +294,6 @@ button:hover {
     .sort-options {
         flex-flow: row wrap;
         justify-content: space-evenly;
-        margin-bottom: auto;
     }
 
     button {
@@ -308,27 +306,12 @@ button:hover {
         text-shadow: none;
     }
 
-    .sort-options {
-        margin-top: 0;
-    }
-
     .theme-prompt {
         display: none;
     }
 
     .slider-container {
         width: 100%;
-    }
-
-    .slider-content {
-        flex-flow: row wrap;
-    }
-
-    .slider-content span {
-        display: none;
-    }
-
-    .slider {
-        width: 90%;
+        justify-content: space-between;
     }
 }

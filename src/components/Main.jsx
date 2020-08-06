@@ -16,6 +16,7 @@ const Main = () => {
     useEffect(() => {
         if (window.innerWidth <= 768) {
             document.getElementById("my-range").setAttribute("max", "40");
+            document.getElementById("max-limit").innerHTML = "40";
             setArrLength(30);
         } else {
             // Otherwise, let the maximum array element be 1000
@@ -33,9 +34,6 @@ const Main = () => {
     let mainText = getComputedStyle(document.documentElement).getPropertyValue(
         "--mainText"
     );
-    let setEleColor = getComputedStyle(
-        document.documentElement
-    ).getPropertyValue("--setEleColor");
     let arrayEleBorder = getComputedStyle(
         document.documentElement
     ).getPropertyValue("--arrayEleBorder");
@@ -141,7 +139,7 @@ const Main = () => {
             setTimeout(end, (750 / Math.log2(750)) * ar.length);
 
             // Invoke the function to begin the entire visualization procedure
-            quickSort(ar);
+            quickSort();
         }
     }
     // Funtion to color the entire array once it has been sorted
@@ -257,11 +255,10 @@ const Main = () => {
                             className="slider"
                             id="my-range"
                         />
-                        <span>150</span>
+                        <span id="max-limit">150</span>
                     </div>
                 </section>
             </div>
-            {/* <div className="footer">FOOTER</div> */}
         </div>
     );
 };
