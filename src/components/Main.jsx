@@ -14,8 +14,8 @@ const Main = () => {
     // Once component is mounted, change the slider's max attribute to 40 for smaller screens
     useEffect(() => {
         // Try clicking theme awitch twicw to see if it helps fix a bug
-        let themeSwitch = document.getElementById("switch-1");
-        themeSwitch.click();
+        // let themeSwitch = document.getElementById("switch-1");
+        // themeSwitch.click();
         // themeSwitch.click();
 
         if (window.innerWidth <= 768) {
@@ -84,8 +84,15 @@ const Main = () => {
         if (
             getComputedStyle(document.documentElement).getPropertyValue(
                 "--backgroundColor"
-            ) === " #C3CDE6"
+            ) === " #2d283e"
         ) {
+            root.style.setProperty("--backgroundColor", " #C3CDE6");
+            root.style.setProperty("--mainText", " #0b2d53");
+            root.style.setProperty("--secondaryColor", " #009DC4");
+            root.style.setProperty("--arrayColor", " #5946B2");
+            root.style.setProperty("--arrayEleBorder", " #391285");
+            root.style.setProperty("--endColor", " #3AA655");
+        } else {
             root.style.setProperty("--backgroundColor", " #2d283e");
             root.style.setProperty("--mainText", " #26dacb");
             root.style.setProperty("--secondaryColor", " #0b2d53");
@@ -93,13 +100,6 @@ const Main = () => {
             root.style.setProperty("--arrayEleBorder", " #ffd3f8");
             root.style.setProperty("--setEleColor", " #9C2542");
             root.style.setProperty("--compareEleColor", " #FFCFF1");
-        } else {
-            root.style.setProperty("--backgroundColor", " #C3CDE6");
-            root.style.setProperty("--mainText", " #0b2d53");
-            root.style.setProperty("--secondaryColor", " #009DC4");
-            root.style.setProperty("--arrayColor", " #5946B2");
-            root.style.setProperty("--arrayEleBorder", " #391285");
-            root.style.setProperty("--endColor", " #3AA655");
         }
     }
 
