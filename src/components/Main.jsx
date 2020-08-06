@@ -16,7 +16,7 @@ const Main = () => {
         // Try clicking theme awitch twicw to see if it helps fix a bug
         let themeSwitch = document.getElementById("switch-1");
         themeSwitch.click();
-        themeSwitch.click();
+        // themeSwitch.click();
 
         if (window.innerWidth <= 768) {
             document.getElementById("my-range").setAttribute("max", "40");
