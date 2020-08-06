@@ -9,7 +9,19 @@ import Logo from "../icon.svg";
 const Main = () => {
     const [arr, setArr] = useState([]);
     const [arrLength, setArrLength] = useState(50);
+    const [maxSize, setMaxSize] = useState(800);
     // const [sorted, setSorted] = useState(false);
+
+    // Once component is mounted, change the slider's max attribute to 40 for smaller screens
+    useEffect(() => {
+        if (window.innerWidth <= 768) {
+            document.getElementById("my-range").setAttribute("max", "40");
+            setArrLength(30);
+        } else {
+            // Otherwise, let the maximum array element be 1000
+            setMaxSize(1000);
+        }
+    }, []);
 
     // All the colors
     let arrayColor = getComputedStyle(
@@ -40,10 +52,10 @@ const Main = () => {
         });
 
         const randArr = [];
-        let random = 100;
+        let random;
         const size = arrLength;
         for (let i = 0; i < size; i++) {
-            random = getRandomInt(10, 1000);
+            random = getRandomInt(10, maxSize);
             randArr.push(random);
         }
         // console.log(randArr);
@@ -72,12 +84,6 @@ const Main = () => {
                 "--backgroundColor"
             ) === " #2d283e"
         ) {
-            // Set the display of the correct theme prompt
-            document.getElementById("dark-theme-prompt").style.display =
-                "block";
-            document.getElementById("light-theme-prompt").style.display =
-                "none";
-
             root.style.setProperty("--backgroundColor", " #C3CDE6");
             root.style.setProperty("--mainText", " #0b2d53");
             root.style.setProperty("--secondaryColor", " #009DC4");
@@ -85,16 +91,11 @@ const Main = () => {
             root.style.setProperty("--arrayEleBorder", " #391285");
             root.style.setProperty("--endColor", " #3AA655");
         } else {
-            // Set the display of the correct theme prompt
-            document.getElementById("dark-theme-prompt").style.display = "none";
-            document.getElementById("light-theme-prompt").style.display =
-                "block";
-
             root.style.setProperty("--backgroundColor", " #2d283e");
             root.style.setProperty("--mainText", " #26dacb");
             root.style.setProperty("--secondaryColor", " #0b2d53");
             root.style.setProperty("--arrayColor", " #E30B5C");
-            root.style.setProperty("--arrayEleBorder", " #79002c");
+            root.style.setProperty("--arrayEleBorder", " #ffd3f8");
             root.style.setProperty("--setEleColor", " #9C2542");
             root.style.setProperty("--compareEleColor", " #FFCFF1");
         }
@@ -194,13 +195,7 @@ const Main = () => {
                 <div></div>
 
                 <div className="theme-switch">
-                    <span
-                        className="theme-prompt"
-                        id="dark-theme-prompt"
-                        style={{ display: "none" }}
-                    >
-                        DARK THEME
-                    </span>
+                    <span className="theme-prompt">LIGHT THEME</span>
                     <div className="switch">
                         <input
                             id="switch-1"
@@ -213,9 +208,6 @@ const Main = () => {
                             className="switch-label"
                         ></label>
                     </div>
-                    <span className="theme-prompt" id="light-theme-prompt">
-                        LIGHT THEME
-                    </span>
                 </div>
             </div>
             <div className="main-container">
