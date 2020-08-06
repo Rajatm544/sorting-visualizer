@@ -1,6 +1,4 @@
-# Visual Sort
-
-<center> <img src="/src/icon.svg" width="50px" height="50px"> </center>
+# Visual Sort <img src="/src/icon.svg" width="48px" height="48px">
 
 -   This is a sorting visualizer application built using React.js
 -   The algorithms that can be visualized currently are **bubble sort**, **insertion sort**, **merge sort** and **quick sort**.
