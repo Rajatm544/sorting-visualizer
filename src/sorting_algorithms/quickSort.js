@@ -36,8 +36,10 @@ function quickSort(ar) {
 
             let pivotDiv;
             if (a[i] < pivot) {
-                pivotIdx++;
+                // Delay the actual swapping to help visualize it
+                await sleep(2 * Math.log2(a.length * i));
 
+                pivotIdx++;
                 // In case a swap needs to be made, color the pivot element
                 pivotDiv = document.getElementById(pivotIdx);
                 pivotDiv.style.background = setEleColor;
@@ -47,9 +49,6 @@ function quickSort(ar) {
                 // visualize the swapping
                 currentDiv.style.height = `${pivotHeight}px`;
                 pivotDiv.style.height = `${currentHeight}px`;
-
-                // Delay the actual swapping to help visualize it
-                await sleep(2 * Math.log2(a.length * i)); // the value has been chosen arbitrarily to best match the O(n logn) time complexity
 
                 // Swap current element with the pivot
                 [a[i], a[pivotIdx]] = [a[pivotIdx], a[i]];
