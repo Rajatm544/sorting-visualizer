@@ -199,6 +199,7 @@ const Main = () => {
                 <div></div>
 
                 <div className="theme-switch">
+                    <span className="theme-prompt">LIGHT THEME</span>
                     <div className="switch">
                         <input
                             id="switch-1"
@@ -211,7 +212,6 @@ const Main = () => {
                             className="switch-label"
                         ></label>
                     </div>
-                    <span className="theme-prompt">LIGHT THEME</span>
                 </div>
             </div>
             <div className="main-container">
