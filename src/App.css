@@ -207,7 +207,6 @@ button:hover {
 }
 
 .switch {
-    /* display: inline-flex; */
     margin: 0 10px;
     position: relative;
 }
@@ -255,11 +254,11 @@ button:hover {
     transition: left 0.25s ease;
 }
 
-.switch-input:checked + .switch-label::before {
+.switch-input:checked+.switch-label::before {
     background-color: var(--mainText);
 }
 
-.switch-input:checked + .switch-label::after {
+.switch-input:checked+.switch-label::after {
     left: 24px;
 }
 
