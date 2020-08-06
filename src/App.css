@@ -198,7 +198,6 @@ button:hover {
 /* Styling the toggle button */
 .theme-switch {
     display: inline-flex;
-    flex-direction: row-reverse;
 }
 
 .theme-prompt {

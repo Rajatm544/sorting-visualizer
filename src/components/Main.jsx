@@ -13,11 +13,6 @@ const Main = () => {
 
     // Once component is mounted, change the slider's max attribute to 40 for smaller screens
     useEffect(() => {
-        // Try clicking theme awitch twicw to see if it helps fix a bug
-        let themeSwitch = document.getElementById("switch-1");
-        themeSwitch.click();
-        // themeSwitch.click();
-
         if (window.innerWidth <= 768) {
             document.getElementById("my-range").setAttribute("max", "40");
             document.getElementById("max-limit").innerHTML = "40";
