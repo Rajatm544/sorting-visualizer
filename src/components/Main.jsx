@@ -111,6 +111,7 @@ const Main = () => {
             button.disabled = true;
             button.style.borderColor = "#DA2C43";
             button.style.color = "#DA2C43";
+            return true;
         });
 
         // // Disable the slider as well
@@ -167,6 +168,7 @@ const Main = () => {
                 color: mainText,
             };
             button.disabled = false;
+            return true;
         });
 
         // Re-enable the slider once the array is sorted
@@ -199,11 +201,11 @@ const Main = () => {
                             id="switch-1"
                             type="checkbox"
                             className="switch-input"
-                            onClick={setTheme}
                         />
                         <label
                             htmlFor="switch-1"
                             className="switch-label"
+                            onClick={setTheme}
                         ></label>
                     </div>
                 </div>
