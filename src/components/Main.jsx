@@ -8,7 +8,7 @@ import Logo from "../icon.svg";
 
 const Main = () => {
     const [arr, setArr] = useState([]);
-    const [arrLength, setArrLength] = useState(50);
+    const [arrLength, setArrLength] = useState(77);
     const [maxSize, setMaxSize] = useState(800);
     // const [sorted, setSorted] = useState(false);
 
@@ -17,7 +17,7 @@ const Main = () => {
         if (window.innerWidth <= 768) {
             document.getElementById("my-range").setAttribute("max", "40");
             document.getElementById("max-limit").innerHTML = "40";
-            setArrLength(30);
+            setArrLength(20);
         } else {
             // Otherwise, let the maximum array element be 1000
             setMaxSize(1000);
@@ -139,7 +139,7 @@ const Main = () => {
             setTimeout(end, (750 / Math.log2(750)) * ar.length);
 
             // Invoke the function to begin the entire visualization procedure
-            quickSort();
+            quickSort(ar);
         }
     }
     // Funtion to color the entire array once it has been sorted
