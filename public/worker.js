@@ -1,22 +1,30 @@
 /* eslint-disable no-restricted-globals */
 let cacheName = "v1";
-const urlsToCache = ["/"];
-
 // Install a service worker
 self.addEventListener("install", (event) => {
-    event.waitUntil(
-        caches.open(cacheName).then((cache) => cache.addAll(urlsToCache))
-    );
+    console.log("Service Workers: Installed");
 });
 
 // Cache and return requests
 self.addEventListener("fetch", (event) => {
     event.respondWith(
-        caches.match(event.request).then((response) => {
-            if (response) return response;
-
-            return fetch(event.request);
-        })
+        fetch(event.request)
+            .then((res) => {
+                //Make clone of response
+                const resClone = res.clone();
+                // Open cache
+                caches.open(cacheName).then((cache) => {
+                    // Add response to the cache
+                    cache.put(event.request, resClone);
+                });
+                return res;
+            })
+            .catch((err) =>
+                caches
+                    .match(event.request)
+                    .then((res) => res)
+                    .catch((err) => console.error(err))
+            )
     );
 });
 
@@ -26,7 +34,9 @@ self.addEventListener("activate", (event) => {
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cache) => {
-                    if (cache !== cacheName) return caches.delete(cache);
+                    if (cache !== cacheName) {
+                        return caches.delete(cache);
+                    }
                 })
             );
         })
