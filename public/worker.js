@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-let cacheName = "v3";
+let cacheName = "v1";
 const urlsToCache = ["/"];
 
 // Install a service worker
