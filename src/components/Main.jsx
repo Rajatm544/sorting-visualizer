@@ -104,6 +104,23 @@ const Main = () => {
     function handleSortSelect(e) {
         e.preventDefault();
 
+        let sortInfo = document.querySelector(".sort-info");
+        const sortInfoStyle = sortInfo.style;
+        const currentAlgo = e.target.value;
+        const squared = "<sup>2</sup>";
+
+        let infoMsg = `**${currentAlgo} sort has a time complexity of `;
+        if (currentAlgo === "bubble" || currentAlgo === "insertion")
+            infoMsg += `O(n${squared})`;
+        if (currentAlgo === "merge" || currentAlgo === "quick")
+            infoMsg += "O(n log n)";
+
+        sortInfo.innerHTML = infoMsg;
+        sortInfo.style = {
+            ...sortInfoStyle,
+            display: "block",
+        };
+
         // Disable the buttons once a sorting technique is clicked
         const buttons = Array.from(document.querySelectorAll("button"));
         buttons.map((button) => {
@@ -119,22 +136,22 @@ const Main = () => {
         slider.style.background = "#DA2C43";
 
         // Perform the required visualization
-        if (e.target.value === "bubble") {
+        if (currentAlgo === "bubble") {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
             setTimeout(end, 1000 * ar.length);
 
             bubbleSort(ar);
-        } else if (e.target.value === "insertion") {
+        } else if (currentAlgo === "insertion") {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
             setTimeout(end, 1000 * ar.length);
 
             insertionSort(ar);
-        } else if (e.target.value === "merge") {
+        } else if (currentAlgo === "merge") {
             // Invoke the end() method in nlogn time as the compared to n sqaured time in the previous two sorting techniques
             setTimeout(end, (1000 / Math.log2(1000)) * ar.length);
 
             mergeSort(ar);
-        } else if (e.target.value === "quick") {
+        } else if (currentAlgo === "quick") {
             // invoke the end() after a time corresponding to O(n logn)
             setTimeout(end, (750 / Math.log2(750)) * ar.length);
 
@@ -181,12 +198,17 @@ const Main = () => {
 
         // Sort the ar array to ensure that if another sorting technique is used immediately after another, it doesnt bug out
         ar = ar.sort((a, b) => a - b);
+
+        document.querySelector(".sort-info").style.display = "none";
     }
 
     return (
         <div className="outer-container">
             <div className="navbar">
-                <span className="nav-brand">
+                <span
+                    className="nav-brand"
+                    onClick={() => window.location.reload()}
+                >
                     <img src={Logo} alt="logo" id="nav-logo" />
                     <p className="nav-heading">Visual Sort</p>
                 </span>
@@ -227,6 +249,10 @@ const Main = () => {
                 </section>
 
                 <section className="array-container">
+                    <div
+                        className="sort-info"
+                        style={{ display: "none" }}
+                    ></div>
                     {arr.map((ele, index) => {
                         return (
                             <div
