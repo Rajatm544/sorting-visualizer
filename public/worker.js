@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-let cacheName = "v1";
+let cacheName = "v2";
 // Install a service worker
 self.addEventListener("install", (event) => {
     console.log("Service Workers: Installed");
