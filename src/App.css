@@ -1,3 +1,4 @@
+/* Set all the variables */
 :root {
     --mainText: #66fcf1;
     --backgroundColor: #2d283e;
@@ -9,6 +10,7 @@
     --endColor: #b2f302;
 }
 
+/* Change how selected text appears */
 ::selection {
     background: var(--arrayColor);
     color: var(--compareEleColor);
@@ -105,10 +107,10 @@ button {
 
 button:hover {
     color: var(--mainText);
-    /* background: var(--arrayColor); */
     border-color: var(--arrayColor);
     text-shadow: -1px 0 var(--arrayColor), 0 1px var(--arrayColor),
         1px 0 var(--arrayColor), 0 -1px var(--arrayColor);
+
     /* Firefox 3.5+, Opera 9+, Safari 1+, Chrome, IE10 */
     filter: progid:DXImageTransform.Microsoft.Glow(Color=var(--arrayColor), Strength=1);
 }
@@ -125,6 +127,7 @@ button:hover {
     box-shadow: inset 0px -10px 8px -8px var(--mainText);
 }
 
+/* Div displaying the time complexity of the algorithm */
 .sort-info {
     position: absolute;
     bottom: 85%;
@@ -133,6 +136,7 @@ button:hover {
     font-weight: 700;
 }
 
+/* Individual array div */
 .array-ele {
     margin: 1px;
     border: 1px solid var(--arrayEleBorder);
@@ -140,6 +144,7 @@ button:hover {
     z-index: 2;
 }
 
+/* Styling the silder to set the array size */
 .slider-container {
     display: inline-flex;
     justify-content: space-evenly;
@@ -272,6 +277,7 @@ button:hover {
     left: 24px;
 }
 
+/* Media queries to make the app responsive */
 @media screen and (max-width: 768px) {
     .outer-container {
         flex-flow: row wrap;

@@ -1,9 +1,13 @@
 /* eslint-disable no-loop-func */
 import React, { useState, useEffect } from "react";
+
+// Import all the sorting visualization files
 import bubbleSort from "../sorting_algorithms/bubbleSort";
 import insertionSort from "../sorting_algorithms/insertionSort";
 import mergeSort from "../sorting_algorithms/mergeSort";
 import quickSort from "../sorting_algorithms/quickSort";
+
+// Import the icon for navbar
 import Logo from "../icon.svg";
 
 const Main = () => {
@@ -14,16 +18,18 @@ const Main = () => {
     // Once component is mounted, change the slider's max attribute to 40 for smaller screens
     useEffect(() => {
         if (window.innerWidth <= 768) {
+            // On smaller screens, limit the array size to 40
             document.getElementById("my-range").setAttribute("max", "40");
             document.getElementById("max-limit").innerHTML = "40";
+            // Make the default size as 20 (mid point)
             setArrLength(20);
         } else {
-            // Otherwise, let the maximum array element be 1000
+            // Otherwise, let the maximum array element be of value 1000
             setMaxSize(1000);
         }
     }, []);
 
-    // All the colors
+    // Fetch all the colors
     let arrayColor = getComputedStyle(
         document.documentElement
     ).getPropertyValue("--arrayColor");
@@ -39,6 +45,7 @@ const Main = () => {
 
     // Fill the array with random numbers
     function resetArray() {
+        // While resetting the array, remove any style applied to the array div from the end() method
         arr.map((ele, index) => {
             document.getElementById(index).style.background = arrayColor;
             document.getElementById(index).style.borderRadius = "0";
@@ -48,6 +55,7 @@ const Main = () => {
             return true;
         });
 
+        // Create an array of random elements and set state after that
         const randArr = [];
         let random;
         const size = arrLength;
@@ -59,23 +67,27 @@ const Main = () => {
         setArr([...new Set(randArr)]);
     }
 
+    // Reset the array whenver the arrLength changes
     useEffect(resetArray, [arrLength]);
 
+    // Function to return a random number in a given range
     function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // update state every time the slider is changed
+    // update arrLength state property, every time the slider is changed
     function handleSlider(e) {
         setArrLength(e.target.value);
     }
 
+    // Make a class-scoped root element to change style based on theme chosen
     let root = document.documentElement;
 
+    // Function the change the theme as required
     function setTheme() {
-        // check if dark theme background already exists
+        // check if dark theme background already exists by default
         if (
             getComputedStyle(document.documentElement).getPropertyValue(
                 "--backgroundColor"
@@ -92,9 +104,8 @@ const Main = () => {
             root.style.setProperty("--mainText", " #26dacb");
             root.style.setProperty("--secondaryColor", " #0b2d53");
             root.style.setProperty("--arrayColor", " #E30B5C");
-            root.style.setProperty("--arrayEleBorder", " #ffd3f8");
-            root.style.setProperty("--setEleColor", " #9C2542");
-            root.style.setProperty("--compareEleColor", " #FFCFF1");
+            root.style.setProperty("--arrayEleBorder", " #FFD3F8");
+            root.style.setProperty("--endColor", " #B2F302");
         }
     }
 
@@ -104,10 +115,13 @@ const Main = () => {
     function handleSortSelect(e) {
         e.preventDefault();
 
-        let sortInfo = document.querySelector(".sort-info");
-        const sortInfoStyle = sortInfo.style;
+        // Store the current sorting algorithm chosen
         const currentAlgo = e.target.value;
-        const squared = "<sup>2</sup>";
+
+        // Add info about time complexity of the sorting algorithm currently chosen
+        let sortInfo = document.querySelector(".sort-info");
+        const sortInfoStyle = sortInfo.style; // Store a copy of the existing style
+        const squared = "<sup>2</sup>"; // Displaying the superscript for squared
 
         let infoMsg = `**${currentAlgo} sort has a time complexity of `;
         if (currentAlgo === "bubble" || currentAlgo === "insertion")
@@ -140,16 +154,19 @@ const Main = () => {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
             setTimeout(end, 1000 * ar.length);
 
+            // Invoke the function to begin the entire visualization procedure
             bubbleSort(ar);
         } else if (currentAlgo === "insertion") {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
             setTimeout(end, 1000 * ar.length);
 
+            // Invoke the function to begin the entire visualization procedure
             insertionSort(ar);
         } else if (currentAlgo === "merge") {
             // Invoke the end() method in nlogn time as the compared to n sqaured time in the previous two sorting techniques
             setTimeout(end, (1000 / Math.log2(1000)) * ar.length);
 
+            // Invoke the function to begin the entire visualization procedure
             mergeSort(ar);
         } else if (currentAlgo === "quick") {
             // invoke the end() after a time corresponding to O(n logn)
@@ -159,6 +176,7 @@ const Main = () => {
             quickSort(ar);
         }
     }
+
     // Funtion to color the entire array once it has been sorted
     function end() {
         Array.from(document.querySelectorAll(".array-ele")).map(
@@ -199,6 +217,7 @@ const Main = () => {
         // Sort the ar array to ensure that if another sorting technique is used immediately after another, it doesnt bug out
         ar = ar.sort((a, b) => a - b);
 
+        // Disable the display of the note stating the time complexity of the algorithm
         document.querySelector(".sort-info").style.display = "none";
     }
 
@@ -231,6 +250,7 @@ const Main = () => {
                     </div>
                 </div>
             </div>
+
             <div className="main-container">
                 <section className="sort-options">
                     <button onClick={resetArray}>Generate New Array</button>
