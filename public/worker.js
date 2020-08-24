@@ -1,11 +1,11 @@
-let CACHE_NAME = "v3";
+const cacheName = "v1";
 let urlsToCache = ["/"];
 
 // Install a service worker
-self.addEventListener("install", (event) => {
+this.addEventListener("install", (event) => {
     // Perform install steps
     event.waitUntil(
-        caches.open(CACHE_NAME).then(function (cache) {
+        caches.open(cacheName).then(function (cache) {
             console.log("Opened cache");
             return cache.addAll(urlsToCache);
         })
@@ -13,7 +13,7 @@ self.addEventListener("install", (event) => {
 });
 
 // Cache and return requests
-self.addEventListener("fetch", (event) => {
+this.addEventListener("fetch", (event) => {
     event.respondWith(
         caches.match(event.request).then(function (response) {
             // Cache hit - return response
@@ -26,14 +26,13 @@ self.addEventListener("fetch", (event) => {
 });
 
 // Update a service worker
-self.addEventListener("activate", (event) => {
-    let cacheWhitelist = ["v3"];
+this.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (cacheWhitelist.indexOf(cacheName) === -1) {
-                        return caches.delete(cacheName);
+                cacheNames.map((cache) => {
+                    if (cache !== cacheName) {
+                        return caches.delete(cache);
                     }
                 })
             );
