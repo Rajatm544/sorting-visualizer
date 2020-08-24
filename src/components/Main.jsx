@@ -256,11 +256,11 @@ const Main = () => {
                             id="switch-1"
                             type="checkbox"
                             className="switch-input"
-                            onClick={setTheme}
                         />
                         <label
                             htmlFor="switch-1"
                             className="switch-label"
+                            onClick={setTheme}
                         ></label>
                     </div>
                 </div>
