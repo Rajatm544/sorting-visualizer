@@ -14,12 +14,13 @@ const Main = () => {
     const [arr, setArr] = useState([]);
     const [arrLength, setArrLength] = useState(77);
     const [maxSize, setMaxSize] = useState(800);
+    const [speed, setSpeed] = useState(1.5);
 
     // Once component is mounted, change the slider's max attribute to 40 for smaller screens
     useEffect(() => {
         if (window.innerWidth <= 768) {
             // On smaller screens, limit the array size to 40
-            document.getElementById("my-range").setAttribute("max", "40");
+            document.getElementById("size-range").setAttribute("max", "40");
             document.getElementById("max-limit").innerHTML = "40";
             // Make the default size as 20 (mid point)
             setArrLength(20);
@@ -79,7 +80,9 @@ const Main = () => {
 
     // update arrLength state property, every time the slider is changed
     function handleSlider(e) {
-        setArrLength(e.target.value);
+        e.target.id === "size-range"
+            ? setArrLength(e.target.value)
+            : setSpeed(e.target.value);
     }
 
     // Make a class-scoped root element to change style based on theme chosen
@@ -145,35 +148,39 @@ const Main = () => {
         });
 
         // // Disable the slider as well
-        const slider = document.querySelector("#my-range");
-        slider.disabled = true;
-        slider.style.background = "#DA2C43";
+        const sizeSlider = document.querySelector("#size-range");
+        const speedSlider = document.querySelector("#speed-range");
+        sizeSlider.disabled = true;
+        speedSlider.disabled = true;
+        sizeSlider.style.background = "#DA2C43";
+        speedSlider.style.background = "#DA2C43";
 
         // Perform the required visualization
         if (currentAlgo === "bubble") {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
-            setTimeout(end, 1000 * ar.length);
+            setTimeout(end, (1000 / speed) * ar.length);
 
             // Invoke the function to begin the entire visualization procedure
-            bubbleSort(ar);
+            bubbleSort(ar, speed);
         } else if (currentAlgo === "insertion") {
             // To color the sorted array once the sorting process is done, O(n square) so settimeout propotional to that
-            setTimeout(end, 1000 * ar.length);
+            setTimeout(end, (1000 / speed) * ar.length);
 
             // Invoke the function to begin the entire visualization procedure
-            insertionSort(ar);
+            insertionSort(ar, speed);
         } else if (currentAlgo === "merge") {
             // Invoke the end() method in nlogn time as the compared to n sqaured time in the previous two sorting techniques
-            setTimeout(end, (1000 / Math.log2(1000)) * ar.length);
+            setTimeout(
+                end,
+                (1000 / speed / Math.log2(1000 / speed)) * ar.length
+            );
 
             // Invoke the function to begin the entire visualization procedure
-            mergeSort(ar);
+            mergeSort(ar, speed);
         } else if (currentAlgo === "quick") {
             // invoke the end() after a time corresponding to O(n logn)
-            setTimeout(end, (750 / Math.log2(750)) * ar.length);
-
             // Invoke the function to begin the entire visualization procedure
-            quickSort(ar);
+            quickSort(ar, speed).then(() => end());
         }
     }
 
@@ -206,13 +213,21 @@ const Main = () => {
         });
 
         // Re-enable the slider once the array is sorted
-        const slider = document.querySelector("#my-range");
-        let currentStyle = slider.style;
-        slider.style = {
+        const sizeSlider = document.querySelector("#size-range");
+        let currentStyle = sizeSlider.style;
+        sizeSlider.style = {
             ...currentStyle,
             background: mainText,
         };
-        slider.disabled = false;
+        sizeSlider.disabled = false;
+
+        const speedSlider = document.querySelector("#speed-range");
+        currentStyle = speedSlider.style;
+        speedSlider.style = {
+            ...currentStyle,
+            background: mainText,
+        };
+        speedSlider.disabled = false;
 
         // Sort the ar array to ensure that if another sorting technique is used immediately after another, it doesnt bug out
         ar = ar.sort((a, b) => a - b);
@@ -289,20 +304,38 @@ const Main = () => {
                 </section>
 
                 <section className="slider-container">
-                    <section></section>
-                    <label>Set Array Size</label>
-                    <div className="slider-content">
-                        <span>5</span>
-                        <input
-                            onChange={handleSlider}
-                            type="range"
-                            min="5"
-                            max="150"
-                            value={arrLength}
-                            className="slider"
-                            id="my-range"
-                        />
-                        <span id="max-limit">150</span>
+                    <div className="array-size-slider">
+                        <label>Set Array Size</label>
+                        <div className="slider-content">
+                            <span>5</span>
+                            <input
+                                onChange={handleSlider}
+                                type="range"
+                                min="5"
+                                max="150"
+                                value={arrLength}
+                                className="size-slider slider"
+                                id="size-range"
+                            />
+                            <span id="max-limit">150</span>
+                        </div>
+                    </div>
+                    <div className="speed-slider">
+                        <label>Set Speed</label>
+                        <div className="slider-content">
+                            <span>1</span>
+                            <input
+                                onChange={handleSlider}
+                                type="range"
+                                min="0.5"
+                                max="2.5"
+                                step="0.5"
+                                value={speed}
+                                className="slider"
+                                id="speed-range"
+                            />
+                            <span>5</span>
+                        </div>
                     </div>
                 </section>
             </div>
