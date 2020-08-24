@@ -24,6 +24,7 @@ body {
     background: var(--backgroundColor);
     color: var(--mainText);
     font-family: "Nunito", sans-serif;
+    transition: 0.3s ease-in-out;
 }
 
 .outer-container {
@@ -150,11 +151,25 @@ button:hover {
     justify-content: space-evenly;
     align-items: center;
     margin: 10px auto;
-    width: 50%;
+    width: 100%;
     color: var(--mainText);
 }
 
-.slider-container .slider-content {
+.array-size-slider {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.speed-slider {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.slider-content {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -330,6 +345,19 @@ button:hover {
     }
 
     .slider-container {
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .array-size-slider {
+        justify-content: space-evenly;
+        width: 100%;
+    }
+
+    .speed-slider {
+        justify-content: space-evenly;
         width: 100%;
     }
 }
