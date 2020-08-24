@@ -1,4 +1,4 @@
-function quickSort(ar) {
+function quickSort(ar, speed) {
     // All the colors
     let arrayColor = getComputedStyle(
         document.documentElement
@@ -36,9 +36,6 @@ function quickSort(ar) {
 
             let pivotDiv;
             if (a[i] < pivot) {
-                // Delay the actual swapping to help visualize it
-                await sleep(2 * Math.log2(a.length * i));
-
                 pivotIdx++;
                 // In case a swap needs to be made, color the pivot element
                 pivotDiv = document.getElementById(pivotIdx);
@@ -49,6 +46,9 @@ function quickSort(ar) {
                 // visualize the swapping
                 currentDiv.style.height = `${pivotHeight}px`;
                 pivotDiv.style.height = `${currentHeight}px`;
+
+                // Delay the actual swapping to help visualize it
+                await sleep(Math.floor(Math.log2(a.length ** 2) / speed));
 
                 // Swap current element with the pivot
                 [a[i], a[pivotIdx]] = [a[pivotIdx], a[i]];
@@ -88,7 +88,9 @@ function quickSort(ar) {
         return array;
     })(ar);
 
-    return;
+    return new Promise((resolve) =>
+        setTimeout(resolve, ar.length ** 2 / speed)
+    );
 }
 
 export default quickSort;

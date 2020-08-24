@@ -1,4 +1,4 @@
-function mergeSort(ar) {
+function mergeSort(ar, speed) {
     // All the colors
     let arrayColor = getComputedStyle(
         document.documentElement
@@ -95,7 +95,7 @@ function mergeSort(ar) {
                     nextEle.style.border = `1px solid ${arrayColor}`;
                 }
             });
-        }, (1000 / Math.log2(1000)) * i); // waiting time correponds to O(n logn). Note: for previous two sorting techniques, the outer loop's waiting time was just (1000 * i)
+        }, (1000 / speed / Math.log2(1000 / speed)) * i); // waiting time correponds to O(n logn). Note: for previous two sorting techniques, the outer loop's waiting time was just (1000 * i)
     }
 }
 

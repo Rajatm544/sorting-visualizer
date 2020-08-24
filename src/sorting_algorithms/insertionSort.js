@@ -1,5 +1,5 @@
 /* eslint-disable no-loop-func */
-function insertionSort(ar) {
+function insertionSort(ar, speed) {
     // All the colors
     let arrayColor = getComputedStyle(
         document.documentElement
@@ -50,9 +50,9 @@ function insertionSort(ar) {
                         current = document.getElementById(j);
                         currentVal = ar[j];
                     }
-                }, (1000 / ar.length) * (ar.length - j)); // multiplied by (arrLength - j) because j is decrementing in this case
+                }, (1000 / speed / ar.length) * (ar.length - j)); // multiplied by (arrLength - j) because j is decrementing in this case
             }
-        }, 1000 * (i - 1)); // multiplied by (i - 1) because outer loop starts from 1, not 0
+        }, (1000 / speed) * (i - 1)); // multiplied by (i - 1) because outer loop starts from 1, not 0
     }
 }
 

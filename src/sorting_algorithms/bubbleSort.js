@@ -1,4 +1,4 @@
-function bubbleSort(ar) {
+function bubbleSort(ar, speed) {
     // All the colors
     let arrayColor = getComputedStyle(
         document.documentElement
@@ -79,9 +79,9 @@ function bubbleSort(ar) {
                             j
                         ).style.background = arrayColor;
                     }
-                }, (1000 / ar.length) * j);
+                }, (1000 / speed / ar.length) * j);
             }
-        }, 1000 * i);
+        }, (1000 / speed) * i);
     }
 }
 
