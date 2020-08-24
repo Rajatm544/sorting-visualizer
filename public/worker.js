@@ -1,39 +1,41 @@
+/* eslint-disable no-restricted-globals */
 const cacheName = "v1";
-let urlsToCache = ["/"];
 
 // Install a service worker
-this.addEventListener("install", (event) => {
-    // Perform install steps
-    event.waitUntil(
-        caches.open(cacheName).then(function (cache) {
-            console.log("Opened cache");
-            return cache.addAll(urlsToCache);
-        })
-    );
+self.addEventListener("install", (event) => {
+    console.log("Service workers have been installed");
 });
 
 // Cache and return requests
-this.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", (event) => {
+    // check if request is made by chrome extensions or web page
+    // if request is made for web page url must contains http
+    // skip the request. if request is not made with http protocol
+    if (!(event.request.url.indexOf("http") === 0)) return;
+
     event.respondWith(
-        caches.match(event.request).then(function (response) {
-            // Cache hit - return response
-            if (response) {
-                return response;
-            }
-            return fetch(event.request);
-        })
+        fetch(event.request)
+            .then((res) => {
+                // Make a clone of website
+                const resClone = res.clone();
+                // Open caches
+                caches.open(cacheName).then((cache) => {
+                    // Add response to the cache
+                    cache.put(event.request, resClone);
+                });
+                return res;
+            })
+            .catch((err) => caches.match(event.request).then((res) => res))
     );
 });
 
 // Update a service worker
-this.addEventListener("activate", (event) => {
+self.addEventListener("activate", (event) => {
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((cache) => {
-                    if (cache !== cacheName) {
-                        return caches.delete(cache);
-                    }
+                    if (cache !== cacheName) return caches.delete(cache);
                 })
             );
         })
