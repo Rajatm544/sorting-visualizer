@@ -110,6 +110,14 @@ const Main = () => {
             root.style.setProperty("--arrayEleBorder", " #FFD3F8");
             root.style.setProperty("--endColor", " #B2F302");
         }
+
+        let links = document.getElementsByTagName("link");
+
+        for (let link of links) {
+            if (link.getAttribute("href").includes("./index.css")) {
+                link.href = "./index.css?id=" + new Date().getMilliseconds();
+            }
+        }
     }
 
     // make a copy of the state array
