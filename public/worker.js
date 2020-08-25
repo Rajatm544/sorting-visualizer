@@ -1,41 +1,41 @@
 /* eslint-disable no-restricted-globals */
-const cacheName = "v1";
+var CACHE_NAME = "version1";
+var urlsToCache = ["/"];
 
 // Install a service worker
 self.addEventListener("install", (event) => {
-    console.log("Service workers have been installed");
+    // Perform install steps
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(function (cache) {
+            console.log("Opened cache");
+            return cache.addAll(urlsToCache);
+        })
+    );
 });
 
 // Cache and return requests
 self.addEventListener("fetch", (event) => {
-    // check if request is made by chrome extensions or web page
-    // if request is made for web page url must contains http
-    // skip the request. if request is not made with http protocol
-    if (!(event.request.url.indexOf("http") === 0)) return;
-
     event.respondWith(
-        fetch(event.request)
-            .then((res) => {
-                // Make a clone of website
-                const resClone = res.clone();
-                // Open caches
-                caches.open(cacheName).then((cache) => {
-                    // Add response to the cache
-                    cache.put(event.request, resClone);
-                });
-                return res;
-            })
-            .catch((err) => caches.match(event.request).then((res) => res))
+        caches.match(event.request).then(function (response) {
+            // Cache hit - return response
+            if (response) {
+                return response;
+            }
+            return fetch(event.request);
+        })
     );
 });
 
 // Update a service worker
 self.addEventListener("activate", (event) => {
+    var cacheWhitelist = ["version1"];
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
-                cacheNames.map((cache) => {
-                    if (cache !== cacheName) return caches.delete(cache);
+                cacheNames.map((cacheName) => {
+                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
                 })
             );
         })
