@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-var CACHE_NAME = "version1";
+var CACHE_NAME = "version2";
 var urlsToCache = ["/"];
 
 // Install a service worker
@@ -31,7 +31,7 @@ self.addEventListener("fetch", (event) => {
 
 // Update a service worker
 self.addEventListener("activate", (event) => {
-    var cacheWhitelist = ["version1"];
+    var cacheWhitelist = ["version2"];
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
