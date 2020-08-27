@@ -64,8 +64,7 @@ const Main = () => {
             random = getRandomInt(10, maxSize);
             randArr.push(random);
         }
-        // console.log(randArr);
-        setArr([...new Set(randArr)]);
+        setArr([...new Set(randArr)]); //Store only unique elements
     }
 
     // Reset the array whenver the arrLength changes
@@ -111,11 +110,11 @@ const Main = () => {
             root.style.setProperty("--endColor", " #B2F302");
         }
 
+        // Update the stylesheet everytime the theme switch is toggled
         let links = document.getElementsByTagName("link");
-
         for (let link of links) {
             if (link.getAttribute("href").includes("./index.css")) {
-                link.href = "./index.css?id=" + new Date().getMilliseconds();
+                link.href = "./index.css?id=" + new Date().getMilliseconds(); //add a new id to refresh the stylesheet
             }
         }
     }
@@ -237,8 +236,8 @@ const Main = () => {
         };
         speedSlider.disabled = false;
 
-        // Sort the ar array to ensure that if another sorting technique is used immediately after another, it doesnt bug out
-        ar = ar.sort((a, b) => a - b);
+        // Sort the state array to ensure that if another sorting technique is used immediately after another, it doesnt bug out
+        ar = [...arr].sort((a, b) => a - b);
 
         // Disable the display of the note stating the time complexity of the algorithm
         document.querySelector(".sort-info").style.display = "none";
